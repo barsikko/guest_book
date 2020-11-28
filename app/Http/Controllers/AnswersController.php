@@ -45,11 +45,9 @@ class AnswersController extends Controller
     public function store(Post $post, AnswerPost $request)
     {
 
-        //$id = $request->post;
           $post = $post::findOrFail($request->get('post'));
           $page = $request->page;
 
-           // $answers = $post->anserAnswer::all()->count();
         $posts_count = $post->answers()->get()->count();
         
         if ($posts_count < 1) {

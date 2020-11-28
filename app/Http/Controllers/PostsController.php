@@ -31,7 +31,7 @@ class PostsController extends Controller
     {
         $page = $request->page;
 
-        $posts = Post::paginate(3, ['*'], 'page', $page);
+        $posts = Post::paginate(25, ['*'], 'page', $page);
 
         return view('index', [
             'posts' => $posts
@@ -105,10 +105,12 @@ class PostsController extends Controller
     {
         $page = $request->page;
 
-        $posts = Post::paginate(3);
+        $posts = Post::paginate(25);
 
         $post = Post::findOrFail($id);
    
+            $this->authorize($post);
+
         return view('index', ['posts' => $posts, 'edit' => $post, 'page' => $page]);
         //return redirect()->route('posts.index', ['edit' => $post, 'page' => $page]);
     }
@@ -134,7 +136,7 @@ class PostsController extends Controller
 
         $request->session()->flash('status', 'Запись была обновлена');        
         } else {
-        $request->session()->flash('error', 'Ошибка обновления записи');           
+        $request->session()->flash('error', 'Ошибка обновления записи на этот пост уже есть ответ');           
           }
 
         return redirect()->route('posts.index', ['page' => $page]);

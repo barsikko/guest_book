@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\BlogPost;
+use App\Post;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -28,7 +28,7 @@ class PostPolicy
      * @param  \App\BlogPost  $blogPost
      * @return mixed
      */
-    public function view(User $user, BlogPost $blogPost)
+    public function view(User $user, Post $post)
     {
         //
     }
@@ -41,7 +41,7 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -51,9 +51,9 @@ class PostPolicy
      * @param  \App\BlogPost  $blogPost
      * @return mixed
      */
-    public function update(User $user, BlogPost $blogPost)
+    public function update(User $user, Post $post)
     {
-        //
+        return $user->id === $post->user_id;
     }
 
     /**
@@ -63,7 +63,7 @@ class PostPolicy
      * @param  \App\BlogPost  $blogPost
      * @return mixed
      */
-    public function delete(User $user, BlogPost $blogPost)
+    public function delete(User $user, Post $post)
     {
         //
     }
@@ -75,7 +75,7 @@ class PostPolicy
      * @param  \App\BlogPost  $blogPost
      * @return mixed
      */
-    public function restore(User $user, BlogPost $blogPost)
+    public function restore(User $user, Post $post)
     {
         //
     }
@@ -87,7 +87,7 @@ class PostPolicy
      * @param  \App\BlogPost  $blogPost
      * @return mixed
      */
-    public function forceDelete(User $user, BlogPost $blogPost)
+    public function forceDelete(User $user, Post $post)
     {
         //
     }

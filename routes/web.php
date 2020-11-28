@@ -15,20 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'PostsController@index')->name('home');
 
-Route::resource('/posts', 'PostsController');//->except(['edit']);
+Route::resource('/posts', 'PostsController')->except(['create', 'show', 'destroy']);
 
-Route::resource('/answers', 'AnswersController')->only(['store','update', 'show']);
-/*
-Route::get('/{id}, array('as' => 'test.route', function($id){
-    return $id;
-}));*/
-
-
-//Route::get('', '');
-
-//Route::get('/posts/index/{page}', 'PostsController@index')->name('index');
-//Route::get('/posts/edit/{post}/{page}', 'PostsController@edit')->name('posts.edit');
+Route::resource('/answers', 'AnswersController')->only(['store']);
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');

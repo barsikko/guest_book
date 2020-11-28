@@ -30,13 +30,13 @@
 						</form> 
 					</div>
 			@else
-				@if( $post->user->email == Auth::user()->email )
 					<h3>{{	$post->content  }}</h3>
+						@can('update', $post)
 					<a href="{{ route('posts.edit', ['post' => $post->id, 'page' => $posts->currentPage()]) }}">
 						<button type="submit" class="btn btn-primary">Редактировать</button>
 					</a>
+						@endcan
 				@endif		
-			@endif
 				<br>
 			</form>
 				@if  ($post->answers)
